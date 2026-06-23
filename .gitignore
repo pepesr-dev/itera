@@ -1,0 +1,33 @@
+#Información sensible o que se puede regenerar
+#Ejemplo: app/Models/User.php (es mi código, no debe
+#ser ignorado)
+# Dependencias
+#Se puede regenerar
+/vendor
+/node_modules
+
+# Entorno
+#.env (tiene contraseñas)
+.env
+.env.backup
+
+# Laravel
+/storage/*.key
+/storage/logs
+/bootstrap/cache
+
+# Vite
+#Se puede regenerar
+/public/build
+/public/hot
+
+# PHPUnit
+.phpunit.result.cache
+/coverage
+
+# Docker
+docker-compose.override.yml
+
+# Sistema
+.DS_Store
+Thumbs.db

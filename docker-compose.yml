@@ -1,0 +1,63 @@
+#Construye la app, la red que conecta los servicios
+#El volumen con los datos persistentes de mysql
+#Conecta pc:contenedores
+
+services:
+#3 servicios = 3 contenedores
+#Mas red interna (itera_network)
+#Mas espacio de almacenamiento persistente (mysql_data)
+#Reinicio automático en caso de error interno (unless-stopped)
+
+  app:  
+    build:
+      #En lugar de descargar una imagen utiliza el Dockerfile local
+      context: .
+      dockerfile: Dockerfile
+    container_name: itera_app
+    restart: unless-stopped
+    #Carpeta por defecto donde se ejecutarán los comandos
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    networks:
+      - itera_network
+
+  nginx:
+    image: nginx:alpine
+    container_name: itera_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    #No arranca hasta que el servicio app, esté encendido
+    depends_on:
+      - app
+    networks:
+      - itera_network
+
+  mysql:
+    image: mysql:8.0
+    container_name: itera_mysql
+    restart: unless-stopped
+    #.env (buscará allí)
+    environment:
+    #Variables de entorno para .env
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - itera_network
+
+networks:
+  itera_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
