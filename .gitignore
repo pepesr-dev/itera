@@ -1,33 +1,27 @@
-#Información sensible o que se puede regenerar
-#Ejemplo: app/Models/User.php (es mi código, no debe
-#ser ignorado)
-# Dependencias
-#Se puede regenerar
-/vendor
-/node_modules
-
-# Entorno
-#.env (tiene contraseñas)
+*.log
+.DS_Store
 .env
 .env.backup
-
-# Laravel
-/storage/*.key
-/storage/logs
-/bootstrap/cache
-
-# Vite
-#Se puede regenerar
-/public/build
-/public/hot
-
-# PHPUnit
+.env.production
+.phpactor.json
 .phpunit.result.cache
-/coverage
-
-# Docker
-docker-compose.override.yml
-
-# Sistema
-.DS_Store
+/.codex
+/.cursor/
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+/auth.json
+/node_modules
+/public/build
+/public/fonts-manifest.dev.json
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
+_ide_helper.php
+Homestead.json
+Homestead.yaml
 Thumbs.db

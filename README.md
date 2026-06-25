@@ -1,77 +1,58 @@
-# Itera
-Pinterest de influencers de moda.
-Spotify de la moda.
-Como youtube pero solo suben imagenes y gifts con sus vestidos.
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## Stack definitivo
-itera/
-├── app/                  ← Lógica Laravel
-├── resources/
-│   └── js/               ← Vue vive aquí (gestionado por Inertia)
-├── database/
-├── tests/                ← PHPUnit
-├── docker-compose.yml
-├── .env.example
-└── .gitignore
+## About Laravel
 
-# docker-compose.yml (Arquitectura del servidor) 
-MySql + Nginx(servidor web, balanceador y caché[Los tipos de servidores(Maestro, esclavo y caché)])
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-# Dockerfile (Configuración del contendor)
-Composer para (PHP y Nginx) extensiones y permisos
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-# /Nginx/default.conf (Comportamiento por defecto del servidor web)
-Puerto, página principal, directorio raiz y otros
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-# .gitignore (evita que github lo suba)
-Contenido regenerable como vendor o sensible como contraseñas de las DB .env
+## Learning Laravel
 
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
+In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
+You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
 
+## Agentic Development
 
+Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
 
+```bash
+composer require laravel/boost --dev
 
+php artisan boost:install
+```
 
+Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
 
+## Contributing
 
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
+## Code of Conduct
 
-# Narrativa
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-Para armar la narrativa técnica de tu guía sin complicarte, el truco es estructurarla como si fuera el **README** de un repositorio profesional en GitHub. No busques florituras; describe las cosas de forma directa, usando términos de desarrollo.
+## Security Vulnerabilities
 
-Aquí tienes los textos redactados que puedes copiar, pegar y adaptar directamente en tu documento de Figma para cada sección:
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## 1. Introducción y Propósito del Proyecto
+## License
 
-### **Itera — Desarrollo Web Front-End & Full-Stack**
-Este proyecto consiste en el desarrollo de una **Single Page Application (SPA)** que replica la arquitectura visual y funcional de Pinterest, centrada en el sector de la moda urbana y deportiva. El objetivo principal es demostrar un dominio avanzado en la creación de **interfaces reactivas**, **maquetación adaptativa** y la correcta gestión de un **flujo completo de datos (CRUD)** mediante la sincronización entre un frontend moderno y una API backend.
-
----
-
-## 2. Bloques de Funcionalidades Principales
-
-### **Mampostería Infinita (Layout Masonry)**
-Implementación de una cuadrícula fluida y asimétrica que organiza las imágenes dinámicamente según su proporción original, evitando espacios vacíos. La interfaz está optimizada estructuralmente para soportar el **renderizado asíncrono** de un feed de datos de manera eficiente.
-
-### **Diseño Responsivo y Modularidad**
-Construcción de la interfaz basada en una **arquitectura de componentes** altamente reutilizables. El diseño cuenta con una adaptabilidad fluida (*Responsive Design*), reestructurando la disposición de la barra de navegación lateral y el número de columnas del feed para garantizar una experiencia óptima en cualquier resolución de pantalla.
-
-### **Gestión de Sesiones y Operaciones CRUD**
-Integración de un sistema de autenticación de usuarios para el **control de sesiones** con lógica persistente. La aplicación se conecta con servicios backend para gestionar el ciclo completo de los datos: creación, lectura, edición y eliminación (**CRUD**) de pines y tableros en tiempo real.
-
----
-
-## 3. Texto para la sección de "Funciones y Optimización"
-
-### **Optimización (Accesibilidad y Usabilidad)**
-El sistema de diseño se ha desarrollado bajo estándares de accesibilidad, aplicando **tamaños mínimos de 48px** en elementos interactivos para facilitar la navegación táctil. Se prioriza el uso de **gráficos vectoriales (SVG)** para asegurar la nitidez visual y reducir los tiempos de carga en el navegador.
-
-### **Pruebas de Compatibilidad (Cross-Browser)**
-Con el fin de asegurar un rendimiento consistente y libre de errores de renderizado, la maquetación y la lógica reactiva han sido testeadas y validadas en los motores de los principales navegadores del mercado: **Firefox (Gecko), Chrome (Blink) y Safari (WebKit)**.
-
----
-
-Acomoda estos textos cerca de los bloques visuales que ya diseñaste en tus capturas. Con esta narrativa, cualquier programador o reclutador que lea tu guía entenderá al instante que sabes exactamente lo que estás construyendo a nivel técnico.
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
