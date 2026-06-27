@@ -1,4 +1,7 @@
 <?php
+//Agregar y deshacer migraciones
+//Crear tablas, manejar sesiones, verificación de emails 
+//y cambios de contraseñas
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,18 +18,24 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            //Fecha en la que se verificó | null
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            //[X]Recuerdame, almacena un token en una cookie
+            //y el la bd. Si coinciden inicia sesión automáticamente.
             $table->rememberToken();
             $table->timestamps();
         });
 
+        //Olvidé mi contraseña        
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
 
+        //Tabla de sesiones que almacena las sesiones activas
+        //de cada usuario.
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();

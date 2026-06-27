@@ -29,4 +29,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function pictures(){
+        return $this->hasMany(PictureUrl::class);
+    }
 }
