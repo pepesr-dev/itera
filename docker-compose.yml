@@ -8,7 +8,9 @@ services:
 #Mas espacio de almacenamiento persistente (mysql_data)
 #Reinicio automático en caso de error interno (unless-stopped)
 
-  app:  
+  app: 
+    env_file:
+      - .env 
     build:
       #En lugar de descargar una imagen utiliza el Dockerfile local
       context: .
@@ -16,7 +18,7 @@ services:
     container_name: itera_app
     restart: unless-stopped
     #Carpeta por defecto donde se ejecutarán los comandos
-    working_dir: /var/www
+    working_dir: /var/www/src
     volumes:
       - .:/var/www
     networks:
@@ -38,9 +40,12 @@ services:
       - itera_network
 
   mysql:
+    
     image: mysql:8.0
     container_name: itera_mysql
     restart: unless-stopped
+    env_file:
+      - .env
     #.env (buscará allí)
     environment:
     #Variables de entorno para .env
