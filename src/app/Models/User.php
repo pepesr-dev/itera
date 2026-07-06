@@ -32,6 +32,6 @@ class User extends Authenticatable
 
     public function pictures()
     {
-        return $this->hasMany(PictureUrl::class);
+        return $this->hasMany(PictureUrl::class, 'user_id')->from('pictures_url');
     }
 }

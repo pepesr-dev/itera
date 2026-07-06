@@ -19,6 +19,9 @@ services:
     restart: unless-stopped
     #Carpeta por defecto donde se ejecutarán los comandos
     working_dir: /var/www/src
+    #Puerto para el modo dev(live) de vite
+    ports:
+      - "5173:5173"
     volumes:
       - .:/var/www
     networks:
