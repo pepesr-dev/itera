@@ -1,4 +1,4 @@
-.env
-docker-compose.override.yml
+itera/.env
+itera/docker-compose.override.yml
 .DS_Store
 Thumbs.db
