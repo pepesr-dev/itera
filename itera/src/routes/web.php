@@ -1,30 +1,29 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-//Importa el controlador de imágenes
 use App\Http\Controllers\PictureUrlController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-
+// 1. La raíz ahora muestra SOLO el Welcome con los botones
 Route::get('/', function () {
-    return inertia('Welcome');
-});
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+})->name('welcome');
 
-//Rutas a las que pueden acceder los usuarios autentificados
+
+// Rutas protegidas
 Route::middleware('auth')->group(function () {
-
+    // 2. El Home con las imágenes se queda aquí, tras loguearse
     Route::get('home', [PictureUrlController::class, 'publicIndex'])->name('home');
     Route::get('create', [PictureUrlController::class, 'create'])->name('create');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    //Genera las rutas automáticamente
-    //picture.index | .store ...
     Route::resource('pictures', PictureUrlController::class);
-
-
 });
 
 require __DIR__ . '/auth.php';

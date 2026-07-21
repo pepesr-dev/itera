@@ -13,21 +13,22 @@ class PictureUrlController extends Controller
 {
 
     /**
-     * Summary of index
+     * index
      * Retorna la lista de imágenes
      * @return \Inertia\Response
      */
     public function index()
     {
-        //Obtiene las imágenes del usuario autentificado
-        $pictures = auth()->user()->pictures()->get();
+        // Obtiene TODAS las imágenes de la BBDD con su usuario asignado
+        $pictures = PictureUrl::with('user')->latest()->get();
 
-        //Retorna la vista Vue con [lista de imágenes]
-        return inertia('Pictures/Home', ['pictures' => $pictures]);
+        return inertia('Pictures/Home', [
+            'pictures' => $pictures
+        ]);
     }
 
     /**
-     * Summary of create
+     * create
      * Retorna la vista del formulario vacío para
      * insertar una imagen nueva
      * @return \Inertia\Response
@@ -75,6 +76,7 @@ class PictureUrlController extends Controller
         //Retorna la vista con los datos de UNA IMAGEN
         return inertia('Pictures/Show', [
             'picture' => $picture->load('user'),
+            'pictures' => PictureUrl::with('user')->get()
         ]);
     }
 

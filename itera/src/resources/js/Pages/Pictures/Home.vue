@@ -1,9 +1,10 @@
 <script setup>
-import PicturesMasonry from './Masonry.vue';
 import IteraLayout from '@/Layouts/IteraLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import Masonry from '@/Components/Masonry.vue'; // Importamos el Masonry
 
 defineProps({
+    //Array recibido de la función index del controlador
     pictures: Array
 });
 </script>
@@ -11,13 +12,9 @@ defineProps({
 <template>
 
     <Head title="Home" />
+
     <IteraLayout>
-
-
-        <PicturesMasonry :pictures="pictures" />
-
-
+        <!--Recibe datos del props-->
+        <Masonry :pictures="pictures" />
     </IteraLayout>
-
-
 </template>

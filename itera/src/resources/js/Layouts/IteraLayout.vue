@@ -6,7 +6,6 @@ import { Link, router } from '@inertiajs/vue3';
 import { usePage } from '@inertiajs/vue3';
 
 
-
 //Iconos
 import { HomeIcon, UserIcon, Cog8ToothIcon, PlusIcon, Squares2X2Icon } from '@heroicons/vue/24/outline';
 
