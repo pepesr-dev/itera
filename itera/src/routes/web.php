@@ -5,7 +5,7 @@ use App\Http\Controllers\PictureUrlController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// 1. La raíz ahora muestra SOLO el Welcome con los botones
+//Raiz (sin autentificación)
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),

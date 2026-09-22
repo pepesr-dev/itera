@@ -6,12 +6,17 @@
  * Además enlaza con la función show()
  * 
  */
+import { inject } from 'vue';
 import { Link } from '@inertiajs/vue3';
+
+import EditIcon from '@/Components/Icons/edit-black.svg';
 
 defineProps({
     // Recibe solo una imagen
     picture: Object
 });
+
+const openEditPanel = inject('openEditPanel');
 </script>
 
 <template>
@@ -64,8 +69,16 @@ defineProps({
                             Guardar
                         </p>
                     </div>
+
+
+
+                    <button @click.stop.prevent="openEditPanel(picture)">
+                        <img class="p-1 bg-color-primary" :src="EditIcon" alt="editar Pin">
+                    </button>
                 </div>
             </div>
+
         </Link>
     </div>
+
 </template>

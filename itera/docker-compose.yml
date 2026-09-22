@@ -9,6 +9,7 @@ services:
 #Reinicio automático en caso de error interno (unless-stopped)
 
   app: 
+    user: "${UID:-1000}:${GID:-1000}"
     env_file:
       - .env 
     build:
@@ -23,7 +24,7 @@ services:
     ports:
       - "5173:5173"
     volumes:
-      - .:/var/www
+      - ./src:/var/www/src
     networks:
       - itera_network
 
