@@ -1,34 +1,68 @@
 <script setup>
-import { useForm } from '@inertiajs/vue3';
+import { ref, watch } from 'vue';
+import { router } from '@inertiajs/vue3';
+
+//Recibe los datos de la imagen a editar desde el padre
 const props = defineProps({
-    picture: Object
-});
-//Recoge los datos del formulario
-const form = useForm({
-    title: props.picture.title,
-    picture_url: props.picture.picture_url,
-    description: props.picture.description,
+    pictureToEdit: Object
 });
 
-const submit = () => {
-    // Le pasamos el ID a la ruta para que Laravel sepa cuál actualizar
-    form.put(route('pictures.update', props.picture.id));
+
+// Variables reactivas para los inputs
+const URL = ref('');
+const TITLE = ref('');
+const DESCRIPTION = ref('');
+
+
+//Actualiza los datos del formulario si selecciono otra imagen
+watch(() => props.pictureToEdit, (newPicture) => {
+    if (newPicture) {
+        URL.value = newPicture.picture_url || '';
+        TITLE.value = newPicture.title || '';
+        DESCRIPTION.value = newPicture.description || '';
+    }
+}, { immediate: true });
+
+//Actualiza los datos de la imagen
+const submitEdit = () => {
+    //Petición put a la ruta update(id)
+    router.put(route('pictures.update', props.pictureToEdit.id), {
+        picture_url: URL.value,
+        title: TITLE.value,
+        description: DESCRIPTION.value,
+    });
+};
+//Elimina la imagen seleccionada
+const submitDelete = () => {
+
+    router.delete(route('pictures.destroy', props.pictureToEdit.id), {
+
+    });
+
 };
 
 </script>
+
 <template>
-    <form @submit.prevent="submit">
-        <label> URL de la imagen
-            <input type="text" v-model="form.picture_url">
-        </label>
-        <label> Título
-            <input type="text" v-model="form.title">
-        </label>
-        <label> Descripción
-            <input type="text" v-model="form.description">
-        </label>
-        <button type="submit" :disabled="form.processing">
-            {{ form.processing ? 'Creando...' : 'Crear Pin' }}
-        </button>
-    </form>
+    <div class=" p-1 bg-color-active">
+        <form @submit.prevent="submitEdit">
+
+            <label> Título:
+                <input type="text" v-model="TITLE">
+            </label>
+            <label> Descripción:
+                <input type="text" v-model="DESCRIPTION">
+            </label>
+            <label> Link
+                <input type="text" v-model="URL">
+            </label>
+            <button type="submit">
+                Actualizar
+            </button>
+            <button type="button" @click="submitDelete">
+                Eliminar
+            </button>
+        </form>
+    </div>
+
 </template>
