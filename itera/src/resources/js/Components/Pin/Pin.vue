@@ -1,7 +1,8 @@
 <script setup>
 
 import { Link } from '@inertiajs/vue3';
-
+import { computed } from 'vue';
+import { usePage } from '@inertiajs/vue3';
 import EditIcon from '@/Components/Icons/edit-black.svg';
 
 //Declara que el props del mason contiene un objeto picture
@@ -9,6 +10,13 @@ const PROPS = defineProps({
     picture: Object
 });
 
+const PAGE = usePage();
+//Identifica al propietario
+const isOwner = computed(() => {
+    const AUTH_USER = PAGE.props.auth?.user;
+
+    return AUTH_USER && PROPS.picture?.user_id === AUTH_USER.id;
+});
 //Declara el emit
 const EMIT = defineEmits(['picture-to-edit']);
 
@@ -47,7 +55,8 @@ const emitSelectedPicture = (event) => {
                     </div>
 
 
-                    <img @click="emitSelectedPicture" class="p-1 w-8 rounded bg-color-tertiary" :src="EditIcon"
+                    <img v-if="isOwner" @click="emitSelectedPicture"
+                        class="absolute bottom-2 right-2 p-1 w-8 rounded bg-color-tertiary" :src="EditIcon"
                         alt="editar Pin">
 
                 </div>
