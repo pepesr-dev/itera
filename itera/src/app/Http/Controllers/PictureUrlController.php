@@ -6,20 +6,18 @@ use App\Models\PictureUrl;
 use Illuminate\Http\Request;
 
 /**
- * Summary of PictureUrlController
- * Clase contenedora de funciones para controlar las imágenes
+ * Clase que contiene funciones para gestionar las imágenes
  */
 class PictureUrlController extends Controller
 {
 
     /**
-     * index
-     * Retorna la lista de imágenes
+     * Obtiene todas las imágenes de la base de datos con su usuario asignado
+     * 
      * @return \Inertia\Response
      */
     public function index()
     {
-        // Obtiene TODAS las imágenes de la BBDD con su usuario asignado
         $pictures = PictureUrl::with('user')->latest()->get();
 
         return inertia('Pictures/Home', [
@@ -27,23 +25,22 @@ class PictureUrlController extends Controller
         ]);
     }
 
+
     /**
-     * create
-     * Retorna la vista del formulario vacío para
-     * insertar una imagen nueva
+     * Muestra el formulario para crea una nueva imagen     
+     *  
      * @return \Inertia\Response
      */
     public function create()
     {
-        //Retorna la vista SIN DATOS
         return inertia('Pictures/Create');
     }
 
 
     /**
-     * Summary of store
-     * Valida y almacena la imagen
-     * @param Request $request
+     * Almacena una nueva imagen en la base de datos.  
+     *
+     * @param Request $request Datos del formulario
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -66,14 +63,13 @@ class PictureUrlController extends Controller
 
 
     /**
-     * Summary of show
-     * Retorna la vista con los datos de una imagen 
-     * @param PictureUrl $picture
+     * Devuelve la vista con los datos de una imagen
+     * 
+     * @param PictureUrl $picture Instancia de la imagen solicitada
      * @return \Inertia\Response
      */
     public function show(PictureUrl $picture)
     {
-        //Retorna la vista con los datos de UNA IMAGEN
         return inertia('Pictures/Show', [
             'picture' => $picture->load('user'),
             'pictures' => PictureUrl::with('user')->get()
@@ -81,10 +77,9 @@ class PictureUrlController extends Controller
     }
 
     /**
-     * Summary of edit
-     * Retorna la vista del formulario para 
-     * editar los datos de una imagen
-     * @param PictureUrl $picture
+     * Muestra el formulario de edición
+     * 
+     * @param PictureUrl $picture Instancia de la imagen a editar
      * @return \Inertia\Response
      */
     public function edit(PictureUrl $picture)
@@ -94,35 +89,35 @@ class PictureUrlController extends Controller
 
 
     /**
-     * Summary of update
      * Valida y actualiza los datos de la imagen
-     * @param Request $request
-     * @param PictureUrl $picture
-     * @return \Illuminate\Http\RedirectResponse
+     * 
+     * @param Request $request Nuevos datos del formulario
+     * @param PictureUrl $picture Instancia de la imagen a actualizar
+     * @return \Illuminate\Http\RedirectResponse Redirección al listado principal
      */
     public function update(Request $request, PictureUrl $picture)
     {
-        //Valida datos | restricciones
+
         $request->validate([
             'picture_url' => 'required|url',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string'
         ]);
-        //Cambia la imagen asociada al usuario.
+
         $picture->update($request->only([
             'picture_url',
             'title',
             'description'
         ]));
-        //Redirije al inicio
+
         return redirect()->route('pictures.index');
     }
 
     /**
-     * Summary of destroy
-     * Elimina una imagen y sus datos
-     * @param PictureUrl $picture
-     * @return \Illuminate\Http\RedirectResponse
+     * Elimina una imagen de la base de datos
+     * 
+     * @param PictureUrl $picture Instancia de la imagen a eliminar
+     * @return \Illuminate\Http\RedirectResponse Redirección al listado principal
      */
     public function destroy(PictureUrl $picture)
     {
@@ -130,6 +125,11 @@ class PictureUrlController extends Controller
         return redirect()->route('pictures.index');
     }
 
+
+    /**
+     * Muestra el listado de imagenes en la sección pública de la web
+     * @return \Inertia\Response
+     */
     public function publicIndex()
     {
         $pictures = PictureUrl::with('user')->get();

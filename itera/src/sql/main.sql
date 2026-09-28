@@ -4,3 +4,5 @@ SELECT * FROM pictures_url;
 show tables;
 
 SELECT * FROM users;
+
+SELECT * FROM pictures_url;
