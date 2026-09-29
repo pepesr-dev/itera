@@ -9,12 +9,16 @@ defineProps({
 </script>
 
 <template>
+
+
     <div v-if="pictures.length === 0" class="text-center p-4">
         <p>No tienes imágenes</p>
     </div>
 
 
-    <div v-else class="columns-[220px] gap-2 max-w-7xl mx-auto ">
+    <div v-else class="columns-[250px] gap-2 ">
+
+        <ImgDetails :picture="picture"></ImgDetails>
 
         <!--Continua la emisión del picture seleccionado hacia Home-->
         <Pin v-for="picture in pictures" :key="picture.id" :picture="picture"
