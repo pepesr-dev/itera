@@ -6,6 +6,7 @@ import { Link, router } from '@inertiajs/vue3';
 import { usePage } from '@inertiajs/vue3';
 
 
+import searchIcon from "@/Components/Icons/lupa-black.png";
 //Iconos
 import { HomeIcon, UserIcon, Cog8ToothIcon, PlusIcon, Squares2X2Icon } from '@heroicons/vue/24/outline';
 
@@ -35,10 +36,18 @@ function logout() {
     <div class="min-h-screen flex flex-col">
 
         <!-- Nav superior -->
-        <nav class="h-16  border-b flex items-center px-4 fixed top-0 left-16 right-0 z-10 bg-color-primary">
-            <div>
+        <nav class="h-16 gap-2 border-b flex items-center px-4 fixed top-0 left-16 right-0 z-10 bg-color-primary ">
+            <div class="flex w-full bg-color-tertiary rounded-md items-center">
+                <img class="w-8 h-8 ml-2" :src="searchIcon" alt="search">
+                <input class="w-full border-none rounded-md bg-color-tertiary" type="text" placeholder="Search">
+            </div>
+            <div class="relative flex  items-center">
+                <img class=" w-12 rounded-full" src="../../../public/logo/sr-v3.png" alt="PepeSR icon">
+                <p>&#9660;</p>
+            </div>
+            <div class=" flex flex-col absolute bg-color-primary p-2 rounded-md top-20 right-10">
 
-                <span>{{ user.name }}</span>
+                <!--<span>{{ user.name }}</span>-->
                 <Link :href="route('profile.edit')"> Perfil </Link>
                 <button @click="logout">Cerrar sesión</button>
             </div>
