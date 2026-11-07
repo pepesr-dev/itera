@@ -2,7 +2,7 @@
 # Composer
 # Permisos
 
-#Instala php con FPM(Fast CGI process Manager[para comunicarse con Nginx])
+#Instala php con FPM(Fast CGI process Manager)
 FROM php:8.3-fpm
 
 # Dependencias del sistema
@@ -30,8 +30,8 @@ WORKDIR /var/www/src
 # Permisos iniciales
 RUN chown -R www-data:www-data /var/www
 
-# 🔥 CORRECCIÓN AQUÍ: Copiamos el contenido de tu carpeta local "itera" hacia el contenedor
-COPY ./itera /var/www/src
+# 🔥 CORRECCIÓN EXACTA: Copiamos lo que está en tu carpeta local "src" (al lado del Dockerfile) al contenedor
+COPY ./src /var/www/src
 
 # Instalar dependencias de PHP saltando restricciones
 RUN composer install --no-dev --optimize-autoloader --no-scripts --ignore-platform-reqs
