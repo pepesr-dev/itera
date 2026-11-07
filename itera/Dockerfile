@@ -40,8 +40,14 @@ WORKDIR /var/www/src
 # Permisos (Usuario del sistema con el que corren Nginx y PHP)
 RUN chown -R www-data:www-data /var/www
 
+# Copiar el código y compilar vue/laravel
+COPY . /var/www/src
+RUN composer install --no-dev --optimize-autoloader
+RUN npm install && npm run build
+RUN chown -R www-data:www-data /var/www/src/storage /var/www/src/bootstrap/cache
+
 # Expone el puerto dinámico de render
 EXPOSE 8080
 
 # Ejecuta migraciones y arranca el servidor
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
+CMD php /var/www/src/artisan migrate --force && php /var/www/src/artisan serve --host=0.0.0.0 --port=$PORT
