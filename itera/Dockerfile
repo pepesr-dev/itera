@@ -39,3 +39,9 @@ WORKDIR /var/www/src
 
 # Permisos (Usuario del sistema con el que corren Nginx y PHP)
 RUN chown -R www-data:www-data /var/www
+
+# Expone el puerto dinámico de render
+EXPOSE 8080
+
+# Ejecuta migraciones y arranca el servidor
+CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
