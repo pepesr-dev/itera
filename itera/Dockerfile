@@ -6,7 +6,6 @@
 FROM php:8.3-fpm
 
 # Dependencias del sistema
-# Se añade libzip-dev para que composer pueda descomprimir paquetes sin fallar
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -19,25 +18,22 @@ RUN apt-get update && apt-get install -y \
     nodejs \
     npm
 
-# Extensiones PHP (activa módulos)
-# Se incluye la extensión 'zip' requerida obligatoriamente por Composer
+# Extensiones PHP
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
-# Composer (gestor de dependencias de php)
+# Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-
-
-# Directorio de trabajo
+# Directorio de trabajo interno del contenedor
 WORKDIR /var/www/src
 
 # Permisos iniciales
 RUN chown -R www-data:www-data /var/www
 
-# Copiar el código del proyecto antes de compilar
-COPY . /var/www/src
+# 🔥 CORRECCIÓN AQUÍ: Copiamos el contenido de tu carpeta local "itera" hacia el contenedor
+COPY ./itera /var/www/src
 
-# 🔥 COMANDO REPARADO: Se añade --ignore-platform-reqs
+# Instalar dependencias de PHP saltando restricciones
 RUN composer install --no-dev --optimize-autoloader --no-scripts --ignore-platform-reqs
 
 # Instalar dependencias de Node y compilar Vue
