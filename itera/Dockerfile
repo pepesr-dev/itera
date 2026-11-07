@@ -26,6 +26,8 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 # Composer (gestor de dependencias de php)
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+
+
 # Directorio de trabajo
 WORKDIR /var/www/src
 
@@ -35,8 +37,8 @@ RUN chown -R www-data:www-data /var/www
 # Copiar el código del proyecto antes de compilar
 COPY . /var/www/src
 
-# Instalar dependencias omitiendo scripts problemáticos locales de desarrollo
-RUN composer install --no-dev --optimize-autoloader --no-scripts
+# 🔥 COMANDO REPARADO: Se añade --ignore-platform-reqs
+RUN composer install --no-dev --optimize-autoloader --no-scripts --ignore-platform-reqs
 
 # Instalar dependencias de Node y compilar Vue
 RUN npm install && npm run build
