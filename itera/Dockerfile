@@ -45,5 +45,5 @@ RUN chown -R www-data:www-data /var/www/src/storage /var/www/src/bootstrap/cache
 # Expone el puerto dinámico de render
 EXPOSE 8080
 
-# Ejecuta migraciones y arranca el servidor
-CMD php /var/www/src/artisan migrate --force && php /var/www/src/artisan serve --host=0.0.0.0 --port=$PORT
+# Ejecuta limpieza de caché, luego migraciones y finalmente arranca el servidor
+CMD php /var/www/src/artisan config:clear && php /var/www/src/artisan migrate --force && php /var/www/src/artisan serve --host=0.0.0.0 --port=$PORT
