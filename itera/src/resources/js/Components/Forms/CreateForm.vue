@@ -24,17 +24,17 @@ const submit = () => {
         <div class="w-full flex-1 space-y-4 pr-1">
             <div>
                 <label class="block font-medium"> Título<br>
-                    <input class="w-full border p-2 rounded" type="text" v-model="form.title">
+                    <input class="input--standard w-full border p-2 rounded" type="text" v-model="form.title">
                 </label>
             </div>
             <div>
                 <label class="block font-medium"> Descripción<br>
-                    <input class="w-full border p-2 rounded" type="text" v-model="form.description">
+                    <input class="input--standard w-full border p-2 rounded" type="text" v-model="form.description">
                 </label>
             </div>
             <div>
                 <label class="block font-medium"> Link<br>
-                    <input class="w-full border p-2 rounded" type="text" v-model="form.picture_url">
+                    <input class="input--standard w-full border p-2 rounded" type="text" v-model="form.picture_url">
                 </label>
             </div>
         </div>
