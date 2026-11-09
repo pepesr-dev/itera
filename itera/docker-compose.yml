@@ -25,6 +25,7 @@ services:
       - "5173:5173"
     volumes:
       - ./src:/var/www/src
+      - ./.env:/var/www/src/.env
     networks:
       - itera_network
 
