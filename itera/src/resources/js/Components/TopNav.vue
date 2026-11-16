@@ -18,6 +18,12 @@ function toggleMenu() {
     isOpen.value = !isOpen.value;
 }
 
+function firstLetter(name) {
+    if (!name) return '';
+    return name.charAt(0).toUpperCase();
+}
+
+
 function logout() {
     router.post(route('logout'))
 }
@@ -36,8 +42,12 @@ function logout() {
         </div>
         <!--Perfil-->
         <div class="relative flex  items-center">
-            <img class="cursor-pointer  hover:bg-color-tertiary w-12 rounded-full" src="../../../public/logo/sr-v3.png"
-                alt="PepeSR icon">
+            <div>
+                <div class=" flex flex-col w-10 h-10 bg-color-tertiary text-center rounded-full  justify-center ">
+                    {{ firstLetter(user.name) }}
+                </div>
+
+            </div>
             <p class="cursor-pointer p-0.5 m-1 hover:bg-color-tertiary rounded-md" @click="toggleMenu">&#9660;</p>
         </div>
         <!--Menú desplegable-->

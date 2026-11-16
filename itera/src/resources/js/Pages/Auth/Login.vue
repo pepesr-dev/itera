@@ -42,7 +42,7 @@ const submit = () => {
         <div v-if="status">{{ status }}</div>
 
         <!--Formulario de autentificación-->
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submit" class="flex flex-col gap-2">
             <div>
                 <InputLabel for="email" value="Email" />
 
@@ -61,20 +61,28 @@ const submit = () => {
             </div>
 
             <div>
-                <label>
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span> Recuerdame</span>
+                <label class="flex items-center cursor-pointer">
+                    <input type="checkbox" name="remember" v-model="form.remember"
+                        style="border: 2px solid #000 !important;"
+                        class="rounded bg-white text-indigo-600 shadow-sm focus:ring-indigo-500 h-4 w-4" />
+                    <span class="ml-2 text-sm text-gray-700">Recuérdame</span>
                 </label>
             </div>
-
             <div>
                 <Link v-if="canResetPassword" :href="route('password.request')">
                     ¿Olvidaste tu contraseña?
                 </Link>
+                <br>
 
                 <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Inicia sesión
                 </PrimaryButton>
+            </div>
+            <div class="mt-4 text-center">
+                <span class="text-sm">¿No tienes una cuenta? </span>
+                <Link :href="route('register')" class="text-sm font-semibold underline hover:no-underline">
+                    Regístrate
+                </Link>
             </div>
         </form>
     </GuestLayout>
