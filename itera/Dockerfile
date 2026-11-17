@@ -43,7 +43,7 @@ RUN npm install && npm run build
 RUN chown -R www-data:www-data /var/www/src/storage /var/www/src/bootstrap/cache
 
 # Expone el puerto dinámico de render
-EXPOSE 8080
+#EXPOSE 8080
 
 # Ejecuta limpieza de caché, luego migraciones y finalmente arranca el servidor
-CMD php /var/www/src/artisan config:clear && php /var/www/src/artisan migrate --force && php /var/www/src/artisan serve --host=0.0.0.0 --port=$PORT
+#CMD php /var/www/src/artisan config:clear && php /var/www/src/artisan migrate --force && php /var/www/src/artisan serve --host=0.0.0.0 --port=$PORT
