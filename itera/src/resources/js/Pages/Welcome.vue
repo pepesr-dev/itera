@@ -2,16 +2,9 @@
 
 import { Head, Link } from '@inertiajs/vue3';
 
-
-
-import logo from "../../../public/logo/iteraLogo.svg";
-
 defineProps({
-
     canLogin: Boolean,
-
     canRegister: Boolean,
-
 });
 
 </script>
@@ -20,12 +13,7 @@ defineProps({
 
 <template>
 
-
-
     <Head title="Itera | Buscador visual" />
-
-
-
 
 
     <div class="flex flex-col items-center justify-center text-center h-screen w-full">
