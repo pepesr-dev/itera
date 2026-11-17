@@ -47,3 +47,6 @@ RUN chown -R www-data:www-data /var/www/src/storage /var/www/src/bootstrap/cache
 
 # Ejecuta limpieza de caché, luego migraciones y finalmente arranca el servidor
 #CMD php /var/www/src/artisan config:clear && php /var/www/src/artisan migrate --force && php /var/www/src/artisan serve --host=0.0.0.0 --port=$PORT
+
+CMD php artisan config:clear && \
+    php artisan cache:clear
