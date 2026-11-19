@@ -33,32 +33,31 @@ const emitSelectedPicture = (event) => {
 <template>
 
     <div class="break-inside-avoid mb-4">
-
+        <!--Muestra otra página con la descripción de la imagen-->
         <Link :href="route('pictures.show', picture.id)">
 
             <div class="group relative rounded-lg overflow-hidden">
-
+                <!--Carga la imagen-->
                 <img :src="picture.picture_url" :alt="picture.title" class="w-full" />
 
+                <!--Opciones del pin-->
                 <div class="absolute inset-0  bg-black/50 hidden group-hover:block">
-
                     <div class="text-xs flex justify-between p-2">
-
+                        <!--Nombre del autor-->
                         <p class="p-1 w-fit rounded hover:bg-black/75 text-white font-bold transition">
                             {{ picture.user?.username }} &#709;
                         </p>
-
+                        <!--Boton para guardar la imagen en el historial del usuario-->
                         <p
                             class="p-1 w-fit rounded bg-color-accent hover:brightness-75 text-white font-bold transition">
                             Guardar
                         </p>
                     </div>
 
-
+                    <!--Botón para que el autor del pin edite los datos-->
                     <img v-if="isOwner" @click="emitSelectedPicture"
                         class="absolute bottom-2 right-2 p-1 w-8 rounded bg-color-tertiary" :src="EditIcon"
                         alt="editar Pin">
-
                 </div>
             </div>
 

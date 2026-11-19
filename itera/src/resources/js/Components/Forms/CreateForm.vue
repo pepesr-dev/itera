@@ -12,33 +12,36 @@ const form = useForm({
 const submit = () => {
     form.post(route('pictures.store'), {
         onSuccess: () => {
-            // Limpia el formulario si todo sale bien
             form.reset();
         }
     });
 };
 </script>
 <template>
+    <!--Formulario-->
     <form @submit.prevent="submit" class="flex flex-col h-full justify-between overflow-y-auto">
 
         <div class="w-full flex-1 space-y-4 pr-1">
+            <!--Título-->
             <div>
                 <label class="block font-medium"> Título<br>
                     <input class="input--create-form w-full " type="text" v-model="form.title">
                 </label>
             </div>
+            <!--Descripción-->
             <div>
                 <label class="block font-medium"> Descripción<br>
                     <input class="input--create-form w-full " type="text" v-model="form.description">
                 </label>
             </div>
+            <!--URL de la imagen-->
             <div>
                 <label class="block font-medium"> Link<br>
                     <input class="input--create-form w-full  " type="text" v-model="form.picture_url">
                 </label>
             </div>
         </div>
-
+        <!--Botón para generar el pin-->
         <div class="flex justify-end pt-4 mt-auto shrink-0 pb-2">
             <button class="hover:brightness-90 p-2 bg-color-accent rounded font-bold text-white transition-all"
                 type="submit" :disabled="form.processing">

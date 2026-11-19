@@ -1,17 +1,19 @@
 <script setup>
+/*Barra de navegación superior*/
 
 import { Link, router } from '@inertiajs/vue3';
 //Hook para acceder a la información de la 
 //página actual
 import { usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
-
 import searchIcon from "@/Components/Icons/lupa-black.png";
 
 //Obtener datos de usuario
 const page = usePage();
 //Almacena los datos del usuario autentificado
 const user = page.props.auth.user;
+
+//Desplegable contraído por defecto
 const isOpen = ref(false);
 
 function toggleMenu() {
@@ -22,7 +24,6 @@ function firstLetter(name) {
     if (!name) return '';
     return name.charAt(0).toUpperCase();
 }
-
 
 function logout() {
     router.post(route('logout'))
@@ -51,9 +52,9 @@ function logout() {
             <p class="cursor-pointer p-0.5 m-1 hover:bg-color-tertiary rounded-md" @click="toggleMenu">&#9660;</p>
         </div>
         <!--Menú desplegable-->
-        <div v-if="isOpen" class=" flex flex-col absolute bg-color-primary p-2 rounded-md top-16 right-2">
+        <div v-if="isOpen" class=" flex flex-col absolute bg-color-primary p-2 rounded-md top-16 right-2 gap-1">
 
-            <!--<span>{{ user.name }}</span>-->
+            <p>{{ user.name }}</p>
             <Link :href="route('profile.edit')"> Perfil </Link>
             <button @click="logout">Cerrar sesión</button>
         </div>

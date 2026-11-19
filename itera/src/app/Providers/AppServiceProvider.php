@@ -21,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        //Fuerza la comunicación mediante https, obligatorio 
+        //para ejecutar la app en render
         if (config('app.env') === 'production') {
             URL::forceScheme('https');
         }

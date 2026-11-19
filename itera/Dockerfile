@@ -30,7 +30,8 @@ WORKDIR /var/www/src
 # Permisos iniciales
 RUN chown -R www-data:www-data /var/www
 
-# 🔥 CORRECCIÓN EXACTA: Copiamos lo que está en tu carpeta local "src" (al lado del Dockerfile) al contenedor
+# Enlazo mi carpeta src local al www/src del linux ejecutado en 
+#el contenedor de mi app
 COPY ./src /var/www/src
 
 # Instalar dependencias de PHP saltando restricciones
@@ -42,11 +43,6 @@ RUN npm install && npm run build
 # Permisos finales sobre las carpetas de Laravel
 RUN chown -R www-data:www-data /var/www/src/storage /var/www/src/bootstrap/cache
 
-# Expone el puerto dinámico de render
-#EXPOSE 8080
-
 # Ejecuta limpieza de caché, luego migraciones y finalmente arranca el servidor
-#CMD php /var/www/src/artisan config:clear && php /var/www/src/artisan migrate --force && php /var/www/src/artisan serve --host=0.0.0.0 --port=$PORT
-
 CMD php artisan config:clear && \
     php artisan cache:clear
